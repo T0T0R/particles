@@ -3,6 +3,6 @@
 #include <vector>
 
 #include "Time.h"
-#include "./Particle/Particle.h"
+#include "./Particles/Particle.h"
 
  void analyse(std::vector<Particle> particles, Time time);

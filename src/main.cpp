@@ -5,19 +5,19 @@
 #include <vector>
 
 #include "main.h"
-#include "./Particle/Particle.h"
-#include "./Particle/Electron.h"
-#include "./Particle/Proton.h"
+#include "./Particles/Particle.h"
+#include "./Particles/Electron.h"
+#include "./Particles/Proton.h"
 
 int main(){
 	std::srand(static_cast<unsigned int>(std::time(0)));
-	int nbElectrons { 1000 };
-	int nbProtons { 1000 };
+	int nbElectrons { 0 };
+	int nbProtons { 0 };
 
-	//std::cout<<"How many electrons ?" ;
-	//std::cin>>nbElectrons;
-	//std::cout<<"How many protons ?";
-	//std::cin>>nbProtons;
+	std::cout<<"How many electrons ?" ;
+	std::cin>>nbElectrons;
+	std::cout<<"How many protons ?";
+	std::cin>>nbProtons;
 
 	Time time = Time(0.0, 1.0E-3, 1.0E-5);
 
@@ -71,13 +71,13 @@ void analyse(std::vector<Particle> particles, Time time) {
 	}
 
 	for (unsigned int i { 0 }; i<particles.size(); i++) {
-		//std::cout<<"Datas at "<<std::to_string(i) << " : " << particles[i].toString()<<std::endl;    //Debug
-		particles[i].convertForceSpeed(time);    //Le total des forces calcule plus haut est transforme en vitesse
-		particles[i].convertSpeedPosition(time);     //La vitesse des particules est maintenant covertie en position
+		std::cout<<"Datas at "<<std::to_string(i) << " : " << particles[i].toString()<<std::endl;    //Debug
+		particles[i].convertForceSpeed(time);  
+		particles[i].convertSpeedPosition(time);
 
-		particles[i].addForceX(-1*particles[i].getForcesX());    //Reset des forces en faisant     force = force - force = 0
+		particles[i].addForceX(-1*particles[i].getForcesX());    //Reset forces by doing	gorce = force - force = 0
 		particles[i].addForceY(-1*particles[i].getForcesY());
 		particles[i].addForceZ(-1*particles[i].getForcesZ());
-		//std::cout<<"Datas at "<<std::to_string(i) << " : " << particles[i].toString()<<std::endl;    //Debug
+		std::cout<<"Datas at "<<std::to_string(i) << " : " << particles[i].toString()<<std::endl;    //Debug
 	}
 }
