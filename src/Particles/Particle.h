@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "../Time.h"
 class Particle
 {
