@@ -28,8 +28,6 @@ Electron::Electron(double PosX, double PosY, double PosZ, double vX, double vY, 
 	m_speedY = vY;
 	m_speedZ = vZ;
 
-	std::cout<<m_posX<<" ; "<<m_posY<<" ; "<<m_posZ<<std::endl;
-
 	std::cout<<"Creation of electron no "<< m_nbElectrons<<std::endl;
 	m_nbElectrons++;
 }

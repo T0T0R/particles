@@ -23,7 +23,6 @@ int main(){
 	//std::cout<<"How many protons ?";
 	//std::cin>>nbProtons;
 
-	std::cout<< (rd()%10000) /10000.0 <<std::endl;
 
 	Time time = Time(0.0, 1.0, 1.0E-2);
 

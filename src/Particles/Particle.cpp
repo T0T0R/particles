@@ -15,16 +15,18 @@ Particle::Particle():
 	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0),
 	m_idParticle(m_nbParticles)
 {
+	std::cout<<m_posX<<" ; "<<m_posY<<" ; "<<m_posZ<<"\t";
 	m_nbParticles++;
 }
 
 Particle::Particle(double mass, double charge, double spin, double posX, double posY, double posZ) :
 	m_mass(mass), m_charge(charge), m_spin(spin),
 	m_posX(posX), m_posY(posY), m_posZ(posZ),
-	m_speedX(0.0), m_speedY(0.0), m_speedZ(0.0), m_speedGlobal(0.0),
+	m_speedX(0.0), m_speedY(0.0), m_speedZ(0.0),
 	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0),
 	m_idParticle(m_nbParticles)
 {
+	std::cout<<m_posX<<" ; "<<m_posY<<" ; "<<m_posZ<<"\t";
 	m_nbParticles++;
 }
 
