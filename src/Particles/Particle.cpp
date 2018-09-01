@@ -9,12 +9,21 @@
 Particle::Particle():
 	m_mass(0.0), m_charge(0.0),
 	m_speedX(0.0), m_speedY(0.0), m_speedZ(0.0),
-	m_posX(0.0), m_posY(0.0), m_posZ(0.0) {}
+	m_posX(0.0), m_posY(0.0), m_posZ(0.0)
+{
+	m_nbParticles++;
+}
 
 Particle::Particle(double mass, double charge, double posX, double posY, double posZ) :
 	m_mass(mass), m_charge(charge),
 	m_speedX(0.0), m_speedY(0.0), m_speedZ(0.0),
-	m_posX(posX), m_posY(posY), m_posZ(posZ) {}
+	m_posX(posX), m_posY(posY), m_posZ(posZ)
+{
+	m_nbParticles++;
+	std::cout<<"debug **********"<<std::endl;
+}
+
+unsigned int Particle::m_nbParticles {0};
 
 
 Particle::~Particle() {
@@ -39,6 +48,8 @@ double Particle::getForcesZ() const {return m_forcesZ;}
 double Particle::getCharge() const {return m_charge;}
 double Particle::getMass() const {return m_mass;}
 double Particle::getSpin() const {return m_spin;}
+
+unsigned int Particle::getNbParticles() const {return m_nbParticles;};
 
 
 
@@ -76,74 +87,76 @@ void Particle::addForces(double X, double Y, double Z) {
 /******METHODES******/
 
 
-double Particle::distanceX(Particle const& other) const {
+double Particle::distanceX(std::shared_ptr<Particle> other) const {
 	//Returns the distance deltaX with another particle
-	return m_posX - other.getPosX();
+	return m_posX - other->getPosX();
 }
-double Particle::distanceY(Particle const& other) const {
-	return m_posY - other.getPosY();
+double Particle::distanceY(std::shared_ptr<Particle> other) const {
+	return m_posY - other->getPosY();
 }
-double Particle::distanceZ(Particle const& other) const {
-	return m_posZ - other.getPosZ();
+double Particle::distanceZ(std::shared_ptr<Particle> other) const {
+	return m_posZ - other->getPosZ();
 }
-double Particle::distance(Particle const& other) const {
+double Particle::distance(std::shared_ptr<Particle> other) const {
 	//Returns the distance in space with another particle
-	double deltaX { m_posX - other.getPosX() };
-	double deltaY { m_posY - other.getPosY() };
-	double deltaZ { m_posZ - other.getPosZ() };
+	double deltaX { m_posX - other->getPosX() };
+	double deltaY { m_posY - other->getPosY() };
+	double deltaZ { m_posZ - other->getPosZ() };
 	return sqrt(deltaX*deltaX+deltaY*deltaY+deltaZ*deltaZ);
 }
 
 
-double Particle::forceGravitationalX(Particle const& other) const {
+double Particle::forceGravitationalX(std::shared_ptr<Particle> other) const {
 	//Computes the gravitational force between two particles along X-axis.
 	// Fx = G*(mA*mB)*(Bx-Ax) / ((Bx-Ax)^2+(By-Ay)^2+(Bz-Az)^2)^(3/2)
 	const double constGravitation { 6.67384e-11 };
-	return ((constGravitation * m_mass*other.getMass() * distanceX(other)) / pow(distance(other), 3));
+	return ((constGravitation * m_mass*other->getMass() * distanceX(other)) / pow(distance(other), 3));
 }
-double Particle::forceGravitationalY(Particle const& other) const {
+double Particle::forceGravitationalY(std::shared_ptr<Particle> other) const {
 	const double constGravitation {6.67384e-11};
-	return ((constGravitation * m_mass*other.getMass() * distanceY(other)) / pow(distance(other), 3));
+	return ((constGravitation * m_mass*other->getMass() * distanceY(other)) / pow(distance(other), 3));
 }
-double Particle::forceGravitationalZ(Particle const& other) const {
+double Particle::forceGravitationalZ(std::shared_ptr<Particle> other) const {
 	const double constGravitation {6.67384e-11};
-	return ((constGravitation * m_mass*other.getMass() * distanceZ(other)) / pow(distance(other), 3));
+	return ((constGravitation * m_mass*other->getMass() * distanceZ(other)) / pow(distance(other), 3));
 }
-double Particle::forceGravitational(Particle const& other) const {
+double Particle::forceGravitational(std::shared_ptr<Particle> other) const {
 	//Computes the gravitational force between two particles
 	// F = G*(mA*mB)/d^2
 	const double constGravitation {6.67384e-11};
-	return ((constGravitation * m_mass * other.getMass()) / pow(distance(other),2));
+	return ((constGravitation * m_mass * other->getMass()) / pow(distance(other),2));
 }
 
 
-double Particle::forceCoulombX(Particle const& other) const {
+double Particle::forceCoulombX(std::shared_ptr<Particle> other) const {
 	//Computes the electostatic force between two particles along X-axis.
 	// Fx = k*(qA*qB)*(Bx-Ax) / ((Bx-Ax)^2+(By-Ay)^2+(Bz-Az)^2)^(3/2)
 	const double kCoulomb { 8.9875517873681764e9 };
-	return ((kCoulomb * m_charge*other.getCharge() * distanceX(other)) / pow(distance(other), 3));
+	return ((kCoulomb * m_charge*other->getCharge() * distanceX(other)) / pow(distance(other), 3));
 	// +A -> Repulsion;   -A -> Attraction
 }
-double Particle::forceCoulombY(Particle const& other) const {
+double Particle::forceCoulombY(std::shared_ptr<Particle> other) const {
 	const double kCoulomb {8.9875517873681764e9};
-	return ((kCoulomb * m_charge*other.getCharge() * distanceY(other)) / pow(distance(other), 3));
+	return ((kCoulomb * m_charge*other->getCharge() * distanceY(other)) / pow(distance(other), 3));
 }
-double Particle::forceCoulombZ(Particle const& other) const {
+double Particle::forceCoulombZ(std::shared_ptr<Particle> other) const {
 	const double kCoulomb {8.9875517873681764e9};
-	return ((kCoulomb * m_charge*other.getCharge() * distanceZ(other)) / pow(distance(other), 3));
+	return ((kCoulomb * m_charge*other->getCharge() * distanceZ(other)) / pow(distance(other), 3));
 }
-double Particle::forceCoulomb(Particle const& other) const {
+double Particle::forceCoulomb(std::shared_ptr<Particle> other) const {
 	//Computes the electrostatic force between two particles
 	// F = k*(qA*qB)/d^2
 	const double kCoulomb {8.9875517873681764e9};
-	return ((kCoulomb * m_charge * other.getCharge()) / pow(distance(other),2));
+	return ((kCoulomb * m_charge * other->getCharge()) / pow(distance(other),2));
 }
 
 
 
-void Particle::interaction(Particle const& other) {
+void Particle::interaction(std::shared_ptr<Particle> other) {
 	//Computes and apply the different interactions.
-	addForces(forceCoulombX(other)-forceGravitationalX(other), forceCoulombY(other)-forceGravitationalY(other), forceCoulombZ(other)-forceGravitationalZ(other));
+	addForces(forceCoulombX(other)-forceGravitationalX(other),
+			  forceCoulombY(other)-forceGravitationalY(other),
+			  forceCoulombZ(other)-forceGravitationalZ(other));
 }
 
 void Particle::convertForceSpeed(Time const& time) {

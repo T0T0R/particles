@@ -9,11 +9,11 @@ public:
 	Proton();
 	Proton(double PosX, double PosY, double PosZ);
 	Proton(double PosX, double PosY, double PosZ, double vX, double vY, double vZ);
-	~Proton();
+	virtual ~Proton();
 
 	unsigned int getNumber() const;
 
-	std::string toString() const;
+	virtual std::string toString() const;
 
 private:
 	const unsigned int m_number;

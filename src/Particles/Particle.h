@@ -6,7 +6,7 @@ class Particle
 public:
 	Particle();
 	Particle(double mass, double charge, double posX, double posY, double posZ);
-	~Particle();
+	virtual ~Particle();
 
 
 	double getPosX() const;
@@ -27,35 +27,38 @@ public:
 	double getMass() const;
 	double getSpin() const;
 
+	unsigned int getNbParticles() const;
+
+
 	void addForceX(double force);
 	void addForceY(double force);
 	void addForceZ(double force);
 	void addForces(double X, double Y, double Z);
 
 
-	double distanceX(Particle const& other) const;
-	double distanceY(Particle const& other) const;
-	double distanceZ(Particle const& other) const;
-	double distance(Particle const& other) const;
+	double distanceX(std::shared_ptr<Particle> other) const;
+	double distanceY(std::shared_ptr<Particle> other) const;
+	double distanceZ(std::shared_ptr<Particle> other) const;
+	double distance(std::shared_ptr<Particle> other) const;
 
-	double forceGravitationalX(Particle const& other) const;
-	double forceGravitationalY(Particle const& other) const;
-	double forceGravitationalZ(Particle const& other) const;
-	double forceGravitational(Particle const& other) const;
+	double forceGravitationalX(std::shared_ptr<Particle> other) const;
+	double forceGravitationalY(std::shared_ptr<Particle> other) const;
+	double forceGravitationalZ(std::shared_ptr<Particle> other) const;
+	double forceGravitational(std::shared_ptr<Particle> other) const;
 
-	double forceCoulombX(Particle const& other) const;
-	double forceCoulombY(Particle const& other) const;
-	double forceCoulombZ(Particle const& other) const;
-	double forceCoulomb(Particle const& other) const;
+	double forceCoulombX(std::shared_ptr<Particle> other) const;
+	double forceCoulombY(std::shared_ptr<Particle> other) const;
+	double forceCoulombZ(std::shared_ptr<Particle> other) const;
+	double forceCoulomb(std::shared_ptr<Particle> other) const;
 
-	void interaction(Particle const& other);
+	void interaction(std::shared_ptr<Particle> other);
 
 	void convertForceSpeed(Time const& time);
 	void convertSpeedPosition(Time const& time);
 
 	void newGamma();
 
-	std::string toString() const;
+	virtual std::string toString() const;
 
 protected:
 	void setPosX(double x);
@@ -92,5 +95,7 @@ protected:
 	const double m_mass;
 	double m_charge;
 	float m_spin;
+
+	static unsigned int m_nbParticles;
 };
 
