@@ -24,10 +24,10 @@ public:
 
 protected:
 	double m_initialTime;
-	double m_previousTime;
+	double m_finalTime;
+	double m_deltaTime; //Timestep
 	double m_actualTime;
-	double m_deltaTime; //Intervalle de temps
-	double m_finalTime; //Fin de la mesure
+	double m_previousTime;
 
 	const unsigned int m_nbMeasuresTotal;
 	unsigned int m_nbMeasuresActual;

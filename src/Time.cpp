@@ -7,14 +7,16 @@
 
 
 Time::Time():
-	m_initialTime(0.0), m_finalTime(1.0), m_deltaTime(1.0E-1), m_actualTime(0.0),
+	m_initialTime(0.0), m_finalTime(1.0), m_deltaTime(1.0E-1),
+	m_actualTime(0.0), m_previousTime(m_actualTime),
 	m_nbMeasuresTotal(static_cast<unsigned int>((m_finalTime - m_initialTime)/m_deltaTime))
 {
 	std::cout<<"Creation of a time object : initial = " << m_initialTime << " s, final = "<< m_finalTime <<" s, step = " << m_deltaTime << " s. Nb measures : " << m_nbMeasuresTotal<<std::endl;
 }
 
 Time::Time(double iTime, double fTime, double delta) :
-	m_initialTime(iTime), m_finalTime(fTime), m_deltaTime(delta), m_actualTime(0.0),
+	m_initialTime(iTime), m_finalTime(fTime), m_deltaTime(delta),
+	m_actualTime(0.0), m_previousTime(m_actualTime),
 	m_nbMeasuresTotal(static_cast<unsigned int>((m_finalTime - m_initialTime)/m_deltaTime))
 {
 	std::cout<<"Creation of a time object : initial = " << m_initialTime << " s, final = "<< m_finalTime <<" s, step = " << m_deltaTime << " s. Nb measures : " << m_nbMeasuresTotal<<std::endl;
