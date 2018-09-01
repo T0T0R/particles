@@ -26,7 +26,6 @@ Particle::Particle(double mass, double charge, double spin, double posX, double 
 	m_idParticle(m_nbParticles)
 {
 	m_nbParticles++;
-	std::cout<<"debug **********"<<std::endl;
 }
 
 unsigned int Particle::m_nbParticles {0};
@@ -183,7 +182,7 @@ void Particle::convertSpeedPosition(Time const& time) {
 
 
 void Particle::newGamma() {
-	//Change mass according to speed
+	//Calculate mass according to speed
 	setGamma(1/(sqrt(1-(pow(getSpeedGlobal()/299792458.0 , 2)))));
 }
 

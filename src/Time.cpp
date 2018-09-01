@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <sstream>
 
 #include "Time.h"
 
@@ -43,7 +44,10 @@ double Time::nextTime() {
 	//One time step ahead
 	setPreviousTime(m_actualTime);
 	setActualTime(m_actualTime + m_deltaTime);
-	std::cout<<"New time ! : "<< m_actualTime<< " s \t -> "<< 100*(m_actualTime/m_finalTime) << "%"<<std::endl;
+
+	std::ostringstream streamObj;
+	streamObj<<"New time ! : "<< m_actualTime<< " s \t -> "<< 100*(m_actualTime/m_finalTime) << "%";
+	std::cout<<streamObj.str()<<std::endl;
 	m_nbMeasuresActual++;
 	return m_actualTime;
 }

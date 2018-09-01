@@ -15,8 +15,8 @@
 
 int main(){
 	std::random_device rd {};
-	int nbElectrons { 1 };
-	int nbProtons { 1 };
+	int nbElectrons { 100 };
+	int nbProtons { 100 };
 
 	//std::cout<<"How many electrons ?" ;
 	//std::cin>>nbElectrons;
@@ -25,7 +25,7 @@ int main(){
 
 	std::cout<< (rd()%10000) /10000.0 <<std::endl;
 
-	Time time = Time(0.0, 1.0E-3, 1.0E-5);
+	Time time = Time(0.0, 1.0, 1.0E-2);
 
 	std::vector<std::shared_ptr<Particle>> particles;
 
@@ -77,13 +77,13 @@ void analyse(std::vector<std::shared_ptr<Particle>> const& particles, Time time)
 
 	}
 	for (unsigned int i { 0 }; i<particles.size(); i++) {
-		std::cout<<"Datas at "<<std::to_string(i) << " : " << particles[i]->toString()<<std::endl;    //Debug
+		//std::cout<<"Datas at "<<std::to_string(i) << " : " << particles[i]->toString()<<std::endl;    //Debug
 		particles[i]->convertForceSpeed(time);  
 		particles[i]->convertSpeedPosition(time);
 
 		particles[i]->addForceX(-1*particles[i]->getForcesX());    //Reset forces by doing	gorce = force - force = 0
 		particles[i]->addForceY(-1*particles[i]->getForcesY());
 		particles[i]->addForceZ(-1*particles[i]->getForcesZ());
-		std::cout<<"Datas at "<<std::to_string(i) << " : " << particles[i]->toString()<<std::endl;    //Debug
+		//std::cout<<"Datas at "<<std::to_string(i) << " : " << particles[i]->toString()<<std::endl;    //Debug
 	}
 }
