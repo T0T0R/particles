@@ -1,2 +1,2 @@
 main: src/* src/Particles/*
-	g++ -o main src/*.cpp src/Particles/*.cpp
+	g++ -Wall -Wextra -o main src/*.cpp src/Particles/*.cpp
