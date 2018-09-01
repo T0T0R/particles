@@ -8,7 +8,7 @@ class Proton: public Particle
 public:
 	Proton();
 	Proton(double PosX, double PosY, double PosZ);
-	Proton(double PosX, double PosY, double PosZ, double vX, double vY, double vZ);
+	Proton(double PosX, double PosY, double PosZ, double vX, double vY, double vZ, double spin=0.5);
 	virtual ~Proton();
 
 	unsigned int getNumber() const;

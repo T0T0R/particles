@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <cmath>
 
 #include "../Time.h"
@@ -7,19 +8,21 @@
 
 
 Particle::Particle():
-	m_mass(0.0), m_charge(0.0),
+	m_mass(0.0), m_charge(0.0), m_spin(0.0),
 	m_speedX(0.0), m_speedY(0.0), m_speedZ(0.0),
 	m_posX(0.0), m_posY(0.0), m_posZ(0.0),
-	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0)
+	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0),
+	m_idParticle(m_nbParticles)
 {
 	m_nbParticles++;
 }
 
-Particle::Particle(double mass, double charge, double posX, double posY, double posZ) :
-	m_mass(mass), m_charge(charge),
+Particle::Particle(double mass, double charge, double spin, double posX, double posY, double posZ) :
+	m_mass(mass), m_charge(charge), m_spin(spin),
 	m_speedX(0.0), m_speedY(0.0), m_speedZ(0.0),
 	m_posX(posX), m_posY(posY), m_posZ(posZ),
-	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0)
+	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0),
+	m_idParticle(m_nbParticles)
 {
 	m_nbParticles++;
 	std::cout<<"debug **********"<<std::endl;
@@ -51,7 +54,8 @@ double Particle::getCharge() const {return m_charge;}
 double Particle::getMass() const {return m_mass;}
 double Particle::getSpin() const {return m_spin;}
 
-unsigned int Particle::getNbParticles() const {return m_nbParticles;};
+unsigned int Particle::getNbParticles() const {return m_nbParticles;}
+unsigned int Particle::getID() const { return m_idParticle; }
 
 
 
@@ -184,8 +188,13 @@ void Particle::newGamma() {
 
 std::string Particle::toString() const {
 	//Description
-	return "Particle : position(" + std::to_string(m_posX) + ", " + std::to_string(m_posY) + ", " + std::to_string(m_posZ) +
-		"), speed(" +	std::to_string(m_speedX) + ", " + std::to_string(m_speedY) + ", " + std::to_string(m_speedZ) +
-		"), force(" + std::to_string(m_forcesX) + ", " + std::to_string(m_forcesY) + ", " + std::to_string(m_forcesZ) + ");";
-}
+	std::ostringstream streamObj;
+	//Add double to stream
+	streamObj <<"Particle nb "+std::to_string(m_idParticle)+
+		" : position("  <<m_posX<< ", " << m_posY<< ", " << m_posZ<<
+		"), speed(" << m_speedX <<", " <<m_speedY<< ", "<<m_speedZ<<
+		"), force(" <<m_forcesX<< ", " << m_forcesY<< ", " << m_forcesZ<<");";
 
+	// Get string from output string stream
+	return streamObj.str();
+}

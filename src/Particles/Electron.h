@@ -8,7 +8,7 @@ class Electron : public Particle
 public:
 	Electron();
 	Electron(double PosX, double PosY, double PosZ);
-	Electron(double PosX, double PosY, double PosZ, double vX, double vY, double vZ);
+	Electron(double PosX, double PosY, double PosZ, double vX, double vY, double vZ, double spin=0.5);
 	virtual ~Electron();
 
 	unsigned int getNumber() const;
@@ -17,6 +17,6 @@ public:
 
 private:
 	const unsigned int m_number;
-	static unsigned int nbElectrons;
+	static unsigned int m_nbElectrons;
 };
 

@@ -29,7 +29,7 @@ int main(){
 	std::vector<std::shared_ptr<Particle>> particles;
 
 	particles.push_back(std::shared_ptr<Electron>(new Electron {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}));
-	particles.push_back(std::shared_ptr<Electron>(new Electron {1.0e-3, 1.0e-3, 0.0, 0.0, 0.0, 0.0}));
+	particles.push_back(std::shared_ptr<Proton>(new Proton {1.0e-3, 1.0e-3, 0.0, 0.0, 0.0, 0.0}));
 
 
 	//for (int i { 0 }; i<nbElectrons; i++) {

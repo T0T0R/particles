@@ -5,7 +5,7 @@ class Particle
 {
 public:
 	Particle();
-	Particle(double mass, double charge, double posX, double posY, double posZ);
+	Particle(double mass, double charge, double spin, double posX, double posY, double posZ);
 	virtual ~Particle();
 
 
@@ -28,6 +28,7 @@ public:
 	double getSpin() const;
 
 	unsigned int getNbParticles() const;
+	unsigned int getID() const;
 
 
 	void addForceX(double force);
@@ -90,12 +91,14 @@ protected:
 	double m_speedZ;
 	double m_speedGlobal;
 
-	double m_gamma;	//Relativistic factor
+	double m_gamma;	//Lorentz factor
 
 	const double m_mass;
 	double m_charge;
-	float m_spin;
+	double m_spin;
 
+
+	const unsigned int m_idParticle;
 	static unsigned int m_nbParticles;
 };
 
