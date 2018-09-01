@@ -47,6 +47,6 @@ std::string Electron::toString() const {
 	std::ostringstream streamObj;
 	streamObj<< "\tElectron nb " + std::to_string(m_number) +
 		" : mass=" <<m_mass<< "kg ; charge="<<m_charge<<"C ; spin="<<m_spin;
-	return Particle::toString()+"\n"+streamObj.str();
+	return Particle::toString()+'\n'+streamObj.str();
 }
 

@@ -15,7 +15,7 @@ Particle::Particle():
 	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0),
 	m_idParticle(m_nbParticles)
 {
-	std::cout<<m_posX<<" ; "<<m_posY<<" ; "<<m_posZ<<"\t";
+	std::cout<<m_posX<<" ; "<<m_posY<<" ; "<<m_posZ<<'\t';
 	m_nbParticles++;
 }
 
@@ -26,7 +26,7 @@ Particle::Particle(double mass, double charge, double spin, double posX, double 
 	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0),
 	m_idParticle(m_nbParticles)
 {
-	std::cout<<m_posX<<" ; "<<m_posY<<" ; "<<m_posZ<<"\t";
+	std::cout<<m_posX<<" ; "<<m_posY<<" ; "<<m_posZ<<'\t';
 	m_nbParticles++;
 }
 
@@ -41,6 +41,11 @@ Particle::~Particle() {
 double Particle::getPosX() const {return m_posX;}
 double Particle::getPosY() const {return m_posY;}
 double Particle::getPosZ() const {return m_posZ;}
+std::string Particle::getPos() const {
+	std::ostringstream streamObj;
+	streamObj<<m_posX<<";"<<m_posY<<";"<<m_posZ;
+	return streamObj.str();
+}
 double Particle::getSpeedX() const {return m_speedX;}
 double Particle::getSpeedY() const {return m_speedY;}
 double Particle::getSpeedZ() const {return m_speedZ;}

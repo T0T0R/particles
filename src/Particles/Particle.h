@@ -15,6 +15,8 @@ public:
 	double getPosY() const;
 	double getPosZ() const;
 
+	std::string getPos() const;
+
 	double getSpeedX() const;
 	double getSpeedY() const;
 	double getSpeedZ() const;
