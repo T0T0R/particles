@@ -28,24 +28,21 @@ int main(){
 
 	std::vector<std::shared_ptr<Particle>> particles;
 
-	particles.push_back(std::shared_ptr<Electron>(new Electron {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}));
-	particles.push_back(std::shared_ptr<Proton>(new Proton {1.0e-3, 1.0e-3, 0.0, 0.0, 0.0, 0.0}));
 
+	for (int i { 0 }; i<nbElectrons; i++) {
+		double nbAleaX { (rd()%10000) /100.0 };
+		double nbAleaY { (rd()%10000) /100.0 };
+		double nbAleaZ { (rd()%10000) /100.0 };
 
-	//for (int i { 0 }; i<nbElectrons; i++) {
-	//	double nbAleaX { (rd()%10000) /100.0 };
-	//	double nbAleaY { (rd()%10000) /100.0 };
-	//	double nbAleaZ { (rd()%10000) /100.0 };
-
-	//	//Add an electron
-	//	particles.push_back(std::shared_ptr<Electron>(new Electron{nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0}));
-	//}
-	//for (int i { 0 }; i<nbProtons; i++) {
-	//	double nbAleaX { (rd()%10000) /100.0 };
-	//	double nbAleaY { (rd()%10000) /100.0 };
-	//	double nbAleaZ { (rd()%10000) /100.0 };
-	//	particles.push_back(std::shared_ptr<Proton>(new Proton(nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0)));
-	//}
+		//Add an electron
+		particles.push_back(std::shared_ptr<Electron>(new Electron{nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0}));
+	}
+	for (int i { 0 }; i<nbProtons; i++) {
+		double nbAleaX { (rd()%10000) /100.0 };
+		double nbAleaY { (rd()%10000) /100.0 };
+		double nbAleaZ { (rd()%10000) /100.0 };
+		particles.push_back(std::shared_ptr<Proton>(new Proton(nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0)));
+	}
 	
 
 	//Gives nb of modelisation steps : nbMeasuresTotal = (finalTime - initialTime)/deltaTime
