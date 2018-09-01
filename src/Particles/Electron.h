@@ -18,7 +18,7 @@ public:
 	virtual std::string toString() const;
 
 private:
-	const unsigned int m_number;
 	static unsigned int m_nbElectrons;
+	const unsigned int m_number;
 };
 

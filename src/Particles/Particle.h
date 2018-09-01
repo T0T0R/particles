@@ -80,6 +80,10 @@ protected:
 
 
 
+	const double m_mass;
+	double m_charge;
+	double m_spin;
+
 	double m_posX;
 	double m_posY;
 	double m_posZ;
@@ -95,12 +99,7 @@ protected:
 
 	double m_gamma;	//Lorentz factor
 
-	const double m_mass;
-	double m_charge;
-	double m_spin;
-
-
-	const unsigned int m_idParticle;
 	static unsigned int m_nbParticles;
+	const unsigned int m_idParticle;
 };
 
