@@ -9,7 +9,8 @@
 Particle::Particle():
 	m_mass(0.0), m_charge(0.0),
 	m_speedX(0.0), m_speedY(0.0), m_speedZ(0.0),
-	m_posX(0.0), m_posY(0.0), m_posZ(0.0)
+	m_posX(0.0), m_posY(0.0), m_posZ(0.0),
+	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0)
 {
 	m_nbParticles++;
 }
@@ -17,7 +18,8 @@ Particle::Particle():
 Particle::Particle(double mass, double charge, double posX, double posY, double posZ) :
 	m_mass(mass), m_charge(charge),
 	m_speedX(0.0), m_speedY(0.0), m_speedZ(0.0),
-	m_posX(posX), m_posY(posY), m_posZ(posZ)
+	m_posX(posX), m_posY(posY), m_posZ(posZ),
+	m_forcesX(0.0), m_forcesY(0.0), m_forcesZ(0.0)
 {
 	m_nbParticles++;
 	std::cout<<"debug **********"<<std::endl;
