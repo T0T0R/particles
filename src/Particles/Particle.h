@@ -88,14 +88,14 @@ protected:
 	double m_posY;
 	double m_posZ;
 
-	double m_forcesX;
-	double m_forcesY;
-	double m_forcesZ;
-
 	double m_speedX;
 	double m_speedY;
 	double m_speedZ;
 	double m_speedGlobal;
+
+	double m_forcesX;
+	double m_forcesY;
+	double m_forcesZ;
 
 	double m_gamma;	//Lorentz factor
 
