@@ -14,8 +14,8 @@
 
 int main(){
 	std::random_device rd {};
-	int nbElectrons { 1000 };
-	int nbProtons { 1000 };
+	int nbElectrons { 100 };
+	int nbProtons { 100 };
 	
 	
 	std::ofstream outputFile("datas.txt", std::ofstream::out|std::ofstream::trunc);
@@ -29,7 +29,7 @@ int main(){
 		//std::cin>>nbProtons;
 
 
-		Time time = Time{0.0, 1.0, 1.0E-2};
+		Time time = Time{0.0, 1.0, 1.0E-3};
 
 		std::vector<std::shared_ptr<Particle>> particles;
 
