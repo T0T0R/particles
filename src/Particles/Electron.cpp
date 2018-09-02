@@ -11,14 +11,14 @@
 Electron::Electron():
 	Particle(9.109E-31, -1.602E-19, 0.5, 0.0, 0.0, 0.0), m_number(m_nbElectrons)
 {
-	std::cout<<"Creation of electron no "<< m_nbElectrons<<std::endl;
+	//std::cout<<"Creation of electron no "<< m_nbElectrons<<std::endl;
 	m_nbElectrons++;
 }
 
 Electron::Electron(double PosX, double PosY, double PosZ) :
 	Particle(9.109E-31, -1.602E-19, 0.5, PosX, PosY, PosZ), m_number(m_nbElectrons)
 {
-	std::cout<<"Creation of electron no "<< m_nbElectrons<<std::endl;
+	//std::cout<<"Creation of electron no "<< m_nbElectrons<<std::endl;
 	m_nbElectrons++;
 }
 
@@ -28,7 +28,7 @@ Electron::Electron(double PosX, double PosY, double PosZ, double vX, double vY, 
 	m_speedY = vY;
 	m_speedZ = vZ;
 
-	std::cout<<"Creation of electron no "<< m_nbElectrons<<std::endl;
+	//std::cout<<"Creation of electron no "<< m_nbElectrons<<std::endl;
 	m_nbElectrons++;
 }
 

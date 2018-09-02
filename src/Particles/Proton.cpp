@@ -11,14 +11,14 @@
 Proton::Proton() :
 	Particle(9.109E-31, +1.602E-19, 0.5, 0.0, 0.0, 0.0), m_number(nbProtons)
 {
-	std::cout<<"Creation of proton no "<< nbProtons<<std::endl;
+	//std::cout<<"Creation of proton no "<< nbProtons<<std::endl;
 	nbProtons++;
 }
 
 Proton::Proton(double PosX, double PosY, double PosZ) :
 	Particle(9.109E-31, +1.602E-19, 0.5, PosX, PosY, PosZ), m_number(nbProtons)
 {
-	std::cout<<"Creation of proton no "<< nbProtons<<std::endl;
+	//std::cout<<"Creation of proton no "<< nbProtons<<std::endl;
 	nbProtons++;
 }
 
@@ -29,7 +29,7 @@ Proton::Proton(double PosX, double PosY, double PosZ, double vX, double vY, doub
 	m_speedY = vY;
 	m_speedZ = vZ;
 
-	std::cout<<"Creation of proton no "<< nbProtons<<std::endl;
+	//std::cout<<"Creation of proton no "<< nbProtons<<std::endl;
 	nbProtons++;
 }
 

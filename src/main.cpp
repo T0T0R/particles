@@ -10,11 +10,12 @@
 #include "./Particles/Particle.h"
 #include "./Particles/Electron.h"
 #include "./Particles/Proton.h"
+#include "./Tools/ProgressBar.h"
 
 int main(){
 	std::random_device rd {};
-	int nbElectrons { 100 };
-	int nbProtons { 100 };
+	int nbElectrons { 1000 };
+	int nbProtons { 1000 };
 	
 	
 	std::ofstream outputFile("datas.txt", std::ofstream::out|std::ofstream::trunc);
@@ -28,9 +29,12 @@ int main(){
 		//std::cin>>nbProtons;
 
 
-		Time time = Time{0.0, 1.0, 1.0E-3};
+		Time time = Time{0.0, 1.0, 1.0E-2};
 
 		std::vector<std::shared_ptr<Particle>> particles;
+
+		//ProgressBar barCreation{0, static_cast<double>(nbElectrons+nbProtons), 50};
+		//barCreation.init();
 
 		/*****CREATE PARTICLES*****/
 		for (int i { 0 }; i<nbElectrons; i++) {
@@ -41,30 +45,40 @@ int main(){
 
 			//Add an electron
 			particles.push_back(std::shared_ptr<Electron>(new Electron{nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0}));
+			//barCreation.update(static_cast<double>(particles.size()));
 		}
 		for (int i { 0 }; i<nbProtons; i++) {
 			double nbAleaX { (rd()%10000) /10000.0 };
 			double nbAleaY { (rd()%10000) /10000.0 };
 			double nbAleaZ { (rd()%10000) /10000.0 };
 			particles.push_back(std::shared_ptr<Proton>(new Proton(nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0)));
+			//barCreation.update(static_cast<double>(particles.size()));
 		}
-
+		//barCreation.~ProgressBar();
 
 		unsigned int nbSteps { time.getNbMeasuresTotal() };	//Gives nb of modelisation steps
 
 		outputFile << nbSteps << '\t' << particles.size() << std::endl;	//Write simulation infos in file for later data interpreting
+		outputFile<<time.getActualTime();	//Writing initial state
+		for (unsigned int i {0}; i<particles.size(); i++) {
+			outputFile << '\t' << particles[i]->getPos();
+		}
 
+		ProgressBar barSim{time.getInitialTime(), time.getFinalTime(), 50, true, true};
+		barSim.init();
+		
 
 
 		/*****SIMULATION*****/
 		for (unsigned int i { 0 }; i<nbSteps; i++) {
 			outputFile <<time.getActualTime();
-
+			
+			barSim.update(time.getActualTime());
 			analyse(particles, time, outputFile); //Particles behavior simulation
 			
-			std::cout<<""<<std::endl;
 			outputFile << std::endl;	//After each time step, skip a line in file
 			time.nextTime();   //Next timestep
+
 		}
 		return 0;
 
@@ -103,5 +117,7 @@ void analyse(std::vector<std::shared_ptr<Particle>> const& particles, Time time,
 		particles[i]->addForceX(-1*particles[i]->getForcesX());    //Reset forces by doing	gorce = force - force = 0
 		particles[i]->addForceY(-1*particles[i]->getForcesY());
 		particles[i]->addForceZ(-1*particles[i]->getForcesZ());
+
+
 	}
 }
