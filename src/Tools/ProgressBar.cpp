@@ -6,8 +6,8 @@
 ProgressBar::ProgressBar(double startValue, double endValue, int totalSize,
 						 bool percentage, bool addInfo, int infoSize):
 	m_startValue(startValue), m_endValue(endValue), m_totalSize(totalSize),
-	m_percentage(percentage), m_value(0.0), m_addInfo(addInfo), m_infoSize(infoSize),
-	m_sizePercent(0)
+	m_percentage(percentage), m_value(0.0), m_sizePercent(0),
+	m_addInfo(addInfo), m_infoSize(infoSize)
 {
 	/*If no size for the info string is given but m_addInfo==true, 
 		the string will be displayed but its size will not be included in m_totalSize*/
