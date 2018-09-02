@@ -27,6 +27,7 @@ void ProgressBar::init(){
 	std::cout<<"[";
 	for (int i{1}; i<barSize-1 ; i++){std::cout<<" ";}
 	std::cout<<"]";
+	std::cout.flush();
 }
 
 double ProgressBar::update(double newValue, std::string const& infos){	//Update Bar and return percentage
@@ -48,7 +49,7 @@ double ProgressBar::update(double newValue, std::string const& infos){	//Update 
 	
 	//Append infos
 	addInfo(percentage, infos);
-
+	std::cout.flush();
 	return (newValue-m_startValue)/(m_endValue-m_startValue);
 }
 
