@@ -30,7 +30,7 @@ int main(){
 		//std::cin>>nbProtons;
 
 
-		Time time = Time{0.0, 1.0, 1.0E-3};
+		Time time = Time{0.0, 1.0, 1.0e-3};
 
 		std::vector<std::shared_ptr<Particle>> particles;
 
@@ -45,14 +45,14 @@ int main(){
 			double nbAleaZ { (rd()%10000) /10000.0 -0.5};
 
 			//Add an electron
-			particles.push_back(std::shared_ptr<ParticleTest>(new ParticleTest {nbAleaX, nbAleaY, nbAleaZ}));
+			particles.push_back(std::shared_ptr<Electron>(new Electron {nbAleaX, nbAleaY, nbAleaZ}));
 			barCreation.update(static_cast<double>(particles.size()), " : Creation");
 		}
 		for (int i { 0 }; i<nbProtons; i++) {
 			double nbAleaX { (rd()%10000) /10000.0  -0.5};
 			double nbAleaY {(rd()%10000) /10000.0  -0.5};
 			double nbAleaZ {(rd()%10000) /10000.0  -0.5};
-			particles.push_back(std::shared_ptr<ParticleTest>(new ParticleTest {nbAleaX, nbAleaY, nbAleaZ}));
+			particles.push_back(std::shared_ptr<Proton>(new Proton {nbAleaX, nbAleaY, nbAleaZ}));
 			barCreation.update(static_cast<double>(particles.size()));
 		}
 		barCreation.~ProgressBar();
@@ -115,7 +115,6 @@ void analyse(std::vector<std::shared_ptr<Particle>> const& particles, Time time,
 		particles[i]->addForceX(-1*particles[i]->getForcesX());    //Reset forces by doing	gorce = force - force = 0
 		particles[i]->addForceY(-1*particles[i]->getForcesY());
 		particles[i]->addForceZ(-1*particles[i]->getForcesZ());
-
 
 	}
 }
