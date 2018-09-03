@@ -3,12 +3,12 @@
 
 
 ParticleTest::ParticleTest():
-	Particle(9.109E-31, 0.0, 0.0, 0.0, 0.0, 0.0) {
+	Particle(0.0, -1.602E-19, 0.0, 0.0, 0.0, 0.0) {
 
 }
 
 ParticleTest::ParticleTest(double PosX, double PosY, double PosZ) :
-	Particle(9.109E-31, 0.0, 0.0, PosX, PosY, PosZ) {
+	Particle(0.0, -1.602E-19, 0.0, PosX, PosY, PosZ) {
 }
 
 

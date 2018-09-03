@@ -45,14 +45,14 @@ int main(){
 			double nbAleaZ { (rd()%10000) /10000.0 -0.5};
 
 			//Add an electron
-			particles.push_back(std::shared_ptr<Electron>(new Electron{nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0}));
+			particles.push_back(std::shared_ptr<ParticleTest>(new ParticleTest {nbAleaX, nbAleaY, nbAleaZ}));
 			barCreation.update(static_cast<double>(particles.size()), " : Creation");
 		}
 		for (int i { 0 }; i<nbProtons; i++) {
 			double nbAleaX { (rd()%10000) /10000.0  -0.5};
 			double nbAleaY {(rd()%10000) /10000.0  -0.5};
 			double nbAleaZ {(rd()%10000) /10000.0  -0.5};
-			particles.push_back(std::shared_ptr<Proton>(new Proton(nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0)));
+			particles.push_back(std::shared_ptr<ParticleTest>(new ParticleTest {nbAleaX, nbAleaY, nbAleaZ}));
 			barCreation.update(static_cast<double>(particles.size()));
 		}
 		barCreation.~ProgressBar();

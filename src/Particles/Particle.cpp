@@ -123,7 +123,8 @@ double Particle::forceGravitationalX(std::shared_ptr<Particle> other) const {
 	//Computes the gravitational force between two particles along X-axis.
 	// Fx = G*(mA*mB)*(Bx-Ax) / ((Bx-Ax)^2+(By-Ay)^2+(Bz-Az)^2)^(3/2)
 	const double constGravitation { 6.67384e-11 };
-	return ((constGravitation * m_mass*other->getMass() * distanceX(other)) / pow(distance(other), 3));
+	double test ((constGravitation * m_mass*other->getMass() * distanceX(other)) / pow(distance(other), 3));
+	return test;
 }
 double Particle::forceGravitationalY(std::shared_ptr<Particle> other) const {
 	const double constGravitation {6.67384e-11};
@@ -171,14 +172,16 @@ void Particle::interaction(std::shared_ptr<Particle> other) {
 	double FZ {forceCoulombZ(other)-forceGravitationalZ(other)};
 	//Computes and apply the different interactions.
 	addForces(FX, FY, FZ);
-	other->addForces(-1*FX, -1*FY, -1*FZ);
+	other->addForces(-1.0*FX, -1.0*FY, -1.0*FZ);
 }
 
 void Particle::convertForceSpeed(Time const& time) {
 	//Euler method
-	m_speedX = ((time.getActualTime()-time.getPreviousTime())*m_forcesX/m_mass)+m_speedX;
-	m_speedY = ((time.getActualTime()-time.getPreviousTime())*m_forcesY/m_mass)+m_speedY;
-	m_speedZ = ((time.getActualTime()-time.getPreviousTime())*m_forcesZ/m_mass)+m_speedZ;
+	if (m_mass!=0.0){
+		m_speedX = ((time.getActualTime()-time.getPreviousTime())*m_forcesX/m_mass)+m_speedX;
+		m_speedY = ((time.getActualTime()-time.getPreviousTime())*m_forcesY/m_mass)+m_speedY;
+		m_speedZ = ((time.getActualTime()-time.getPreviousTime())*m_forcesZ/m_mass)+m_speedZ;
+	}
 }
 
 void Particle::convertSpeedPosition(Time const& time) {
