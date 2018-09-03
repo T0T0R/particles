@@ -97,12 +97,6 @@ void analyse(std::vector<std::shared_ptr<Particle>> const& particles, Time time,
 	for (unsigned int i { 0 }; i<particles.size(); i++) {
 		//Apply changes between THIS particle and [every particle except THIS ONE]
 
-		//Apply changes on objectA with objectB on [0 ; objectA[
-		for (unsigned int j { 0 }; j<i; j++) {
-			particles[i]->interaction(particles[j]);
-		}
-
-		//Apply changes on objectA with objectB on ]obectA ; end]
 		for (unsigned int j { i+1 }; j<particles.size(); j++) {
 			particles[i]->interaction(particles[j]);
 		}

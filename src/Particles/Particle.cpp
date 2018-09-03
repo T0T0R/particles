@@ -166,10 +166,12 @@ double Particle::forceCoulomb(std::shared_ptr<Particle> other) const {
 
 
 void Particle::interaction(std::shared_ptr<Particle> other) {
+	double FX { forceCoulombX(other)-forceGravitationalX(other) };
+	double FY {forceCoulombY(other)-forceGravitationalY(other)};
+	double FZ {forceCoulombZ(other)-forceGravitationalZ(other)};
 	//Computes and apply the different interactions.
-	addForces(forceCoulombX(other)-forceGravitationalX(other),
-			  forceCoulombY(other)-forceGravitationalY(other),
-			  forceCoulombZ(other)-forceGravitationalZ(other));
+	addForces(FX, FY, FZ);
+	other->addForces(-1*FX, -1*FY, -1*FZ);
 }
 
 void Particle::convertForceSpeed(Time const& time) {
