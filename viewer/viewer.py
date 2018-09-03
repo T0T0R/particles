@@ -17,10 +17,12 @@ nbPart = int(simInfos[1]);
 
 particles=[]
 timing = []
+times = []
 
 for line in rawLines[1:]:
     #Extract coordinates without timings
     timing.append(   (str(line[1:]).split("\t"))[1:]      );
+    times.append( (str(line[1:]).split("\t"))[0]  )
 
 
 #creating this table:
@@ -43,10 +45,11 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 plotlyDatas = []
-
+i=0
 for iParticle in particles:
-    ax.plot(iParticle[0], iParticle[1], iParticle[2])#For matplotlib if plotly doesn't work
-    plotlyDatas.append(Scatter3d(x=iParticle[0], y=iParticle[1], z=iParticle[2], hoverinfo="none", mode="lines"))#For plotly
+    #ax.plot(iParticle[0], iParticle[1], iParticle[2])#For matplotlib if plotly doesn't work
+    plotlyDatas.append(Scatter3d(x=iParticle[0], y=iParticle[1], z=iParticle[2], customdata=times, hovertext="Particle "+str(i), hoverinfo="text", mode="lines"));#For plotly
+    i+=1;
     
 
 
@@ -59,4 +62,4 @@ plotly.offline.plot({#For plotly
 
 
 
-plt.show();#For matplotlib if plotly doesn't work
+#plt.show();#For matplotlib if plotly doesn't work

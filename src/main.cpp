@@ -14,8 +14,8 @@
 
 int main(){
 	std::random_device rd {};
-	int nbElectrons { 10 };
-	int nbProtons { 20 };
+	int nbElectrons { 4 };
+	int nbProtons { 4 };
 	
 	
 	std::ofstream outputFile("datas.txt", std::ofstream::out|std::ofstream::trunc);
@@ -33,28 +33,28 @@ int main(){
 
 		std::vector<std::shared_ptr<Particle>> particles;
 
-		/*ProgressBar barCreation{0, static_cast<double>(nbElectrons+nbProtons), 50};
-		barCreation.init();*/
+		ProgressBar barCreation{0, static_cast<double>(nbElectrons+nbProtons), 100, true, true};
+		barCreation.init();
 
 		/*****CREATE PARTICLES*****/
 		for (int i { 0 }; i<nbElectrons; i++) {
 			//Random coordinates
-			double nbAleaX { (rd()%10000) /10000.0 };
-			double nbAleaY { (rd()%10000) /10000.0};
-			double nbAleaZ { (rd()%10000) /10000.0};
+			double nbAleaX { (rd()%10000) /10000.0 -0.5};
+			double nbAleaY { (rd()%10000) /10000.0 -0.5};
+			double nbAleaZ { (rd()%10000) /10000.0 -0.5};
 
 			//Add an electron
 			particles.push_back(std::shared_ptr<Electron>(new Electron{nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0}));
-			//barCreation.update(static_cast<double>(particles.size()));
+			barCreation.update(static_cast<double>(particles.size()), " : Creation");
 		}
 		for (int i { 0 }; i<nbProtons; i++) {
-			double nbAleaX { (rd()%10000) /10000.0 };
-			double nbAleaY { (rd()%10000) /10000.0 };
-			double nbAleaZ { (rd()%10000) /10000.0 };
+			double nbAleaX { (rd()%10000) /10000.0  -0.5};
+			double nbAleaY {(rd()%10000) /10000.0  -0.5};
+			double nbAleaZ {(rd()%10000) /10000.0  -0.5};
 			particles.push_back(std::shared_ptr<Proton>(new Proton(nbAleaX, nbAleaY, nbAleaZ, 0.0, 0.0, 0.0)));
-			//barCreation.update(static_cast<double>(particles.size()));
+			barCreation.update(static_cast<double>(particles.size()));
 		}
-		//barCreation.~ProgressBar();
+		barCreation.~ProgressBar();
 
 		unsigned int nbSteps { time.getNbMeasuresTotal() };	//Gives nb of modelisation steps
 
@@ -64,7 +64,7 @@ int main(){
 			outputFile << '\t' << particles[i]->getPos();
 		}
 
-		ProgressBar barSim{time.getInitialTime(), time.getFinalTime(), 100, true, true, 13};
+		ProgressBar barSim{time.getInitialTime(), time.getFinalTime(), 100, true, true};
 		barSim.init();
 		
 
@@ -81,6 +81,8 @@ int main(){
 			barSim.update(time.getActualTime()," : Simulation");
 
 		}
+		barSim.~ProgressBar();
+
 		return 0;
 
 
