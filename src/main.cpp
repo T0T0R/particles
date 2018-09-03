@@ -10,6 +10,7 @@
 #include "./Particles/Particle.h"
 #include "./Particles/Electron.h"
 #include "./Particles/Proton.h"
+#include "./Particles/ParticleTest.h"
 #include "./Tools/ProgressBar.h"
 
 int main(){
