@@ -14,8 +14,8 @@
 
 int main(){
 	std::random_device rd {};
-	int nbElectrons { 100 };
-	int nbProtons { 100 };
+	int nbElectrons { 10 };
+	int nbProtons { 20 };
 	
 	
 	std::ofstream outputFile("datas.txt", std::ofstream::out|std::ofstream::trunc);
@@ -64,7 +64,7 @@ int main(){
 			outputFile << '\t' << particles[i]->getPos();
 		}
 
-		ProgressBar barSim{time.getInitialTime(), time.getFinalTime(), 50, true, true};
+		ProgressBar barSim{time.getInitialTime(), time.getFinalTime(), 100, true, true, 13};
 		barSim.init();
 		
 
@@ -73,11 +73,12 @@ int main(){
 		for (unsigned int i { 0 }; i<nbSteps; i++) {
 			outputFile <<time.getActualTime();
 			
-			barSim.update(time.getActualTime());
+			
 			analyse(particles, time, outputFile); //Particles behavior simulation
 			
 			outputFile << std::endl;	//After each time step, skip a line in file
 			time.nextTime();   //Next timestep
+			barSim.update(time.getActualTime()," : Simulation");
 
 		}
 		return 0;
