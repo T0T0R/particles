@@ -9,6 +9,12 @@ ProgressBar::ProgressBar(double startValue, double endValue, int totalSize,
 	m_percentage(percentage), m_value(0.0), m_sizePercent(0),
 	m_addInfo(addInfo), m_infoSize(infoSize)
 {
+	if (m_used){
+		std::cerr<<"Another ProgressBar is in use"<<std::endl;
+		this->~ProgressBar();
+	}
+
+	m_used = true;
 	/*If no size for the info string is given but m_addInfo==true, 
 		the string will be displayed but its size will not be included in m_totalSize*/
 
@@ -16,9 +22,12 @@ ProgressBar::ProgressBar(double startValue, double endValue, int totalSize,
 	//4 characters to display percentage
 }
 
+bool ProgressBar::m_used{false};
+
 
 ProgressBar::~ProgressBar(){
 	std::cout<<std::endl;
+	m_used=false;
 }
 
 

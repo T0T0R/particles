@@ -33,8 +33,8 @@ int main(){
 
 		std::vector<std::shared_ptr<Particle>> particles;
 
-		//ProgressBar barCreation{0, static_cast<double>(nbElectrons+nbProtons), 50};
-		//barCreation.init();
+		/*ProgressBar barCreation{0, static_cast<double>(nbElectrons+nbProtons), 50};
+		barCreation.init();*/
 
 		/*****CREATE PARTICLES*****/
 		for (int i { 0 }; i<nbElectrons; i++) {

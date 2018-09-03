@@ -13,6 +13,8 @@ public:
 protected:
 	void addInfo(int const percentage, std::string const& infos) const;
 
+	static bool m_used;	//Only one progress bar at a time
+
 	double const m_startValue;
 	double const m_endValue;
 	int const m_totalSize;	//Size of the whole thing (bar + optionnal infos)
