@@ -60,10 +60,6 @@ int main(){
 		unsigned int nbSteps { time.getNbMeasuresTotal() };	//Gives nb of modelisation steps
 
 		outputFile << nbSteps << '\t' << particles.size() << std::endl;	//Write simulation infos in file for later data interpreting
-		outputFile<<time.getActualTime();	//Writing initial state
-		for (unsigned int i {0}; i<particles.size(); i++) {
-			outputFile << '\t' << particles[i]->getPos();
-		}
 
 		ProgressBar barSim{time.getInitialTime(), time.getFinalTime(), 100, true, true};
 		barSim.init();
@@ -107,12 +103,14 @@ void analyse(std::vector<std::shared_ptr<Particle>> const& particles, Time time,
 
 	}
 	for (unsigned int i { 0 }; i<particles.size(); i++) {
-		outputFile << '\t' << particles[i]->getPos();
+
 
 		particles[i]->convertForceSpeed(time);  
 		particles[i]->convertSpeedPosition(time);
+		outputFile << '\t' << particles[i]->getPos();
 
-		particles[i]->addForceX(-1*particles[i]->getForcesX());    //Reset forces by doing	gorce = force - force = 0
+		//Reset forces by doing		force = force - force;
+		particles[i]->addForceX(-1*particles[i]->getForcesX());
 		particles[i]->addForceY(-1*particles[i]->getForcesY());
 		particles[i]->addForceZ(-1*particles[i]->getForcesZ());
 
