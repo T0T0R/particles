@@ -15,8 +15,8 @@
 
 int main(){
 	std::random_device rd {};
-	int nbElectrons { 4 };
-	int nbProtons { 4 };
+	int nbElectrons { 100 };
+	int nbProtons { 100 };
 	
 	
 	std::ofstream outputFile("datas.txt", std::ofstream::out|std::ofstream::trunc);

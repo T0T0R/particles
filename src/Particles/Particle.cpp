@@ -122,22 +122,22 @@ double Particle::distance(std::shared_ptr<Particle> other) const {
 double Particle::forceGravitationalX(std::shared_ptr<Particle> other) const {
 	//Computes the gravitational force between two particles along X-axis.
 	// Fx = G*(mA*mB)*(Bx-Ax) / ((Bx-Ax)^2+(By-Ay)^2+(Bz-Az)^2)^(3/2)
-	const double constGravitation { 6.67384e-11 };
+	const double constGravitation { -6.67384e-11 };
 	double test ((constGravitation * m_mass*other->getMass() * distanceX(other)) / pow(distance(other), 3));
 	return test;
 }
 double Particle::forceGravitationalY(std::shared_ptr<Particle> other) const {
-	const double constGravitation {6.67384e-11};
+	const double constGravitation {-6.67384e-11};
 	return ((constGravitation * m_mass*other->getMass() * distanceY(other)) / pow(distance(other), 3));
 }
 double Particle::forceGravitationalZ(std::shared_ptr<Particle> other) const {
-	const double constGravitation {6.67384e-11};
+	const double constGravitation {-6.67384e-11};
 	return ((constGravitation * m_mass*other->getMass() * distanceZ(other)) / pow(distance(other), 3));
 }
 double Particle::forceGravitational(std::shared_ptr<Particle> other) const {
 	//Computes the gravitational force between two particles
 	// F = G*(mA*mB)/d^2
-	const double constGravitation {6.67384e-11};
+	const double constGravitation {-6.67384e-11};
 	return ((constGravitation * m_mass * other->getMass()) / pow(distance(other),2));
 }
 
@@ -167,9 +167,9 @@ double Particle::forceCoulomb(std::shared_ptr<Particle> other) const {
 
 
 void Particle::interaction(std::shared_ptr<Particle> other) {
-	double FX {forceCoulombX(other)-forceGravitationalX(other) };
-	double FY {forceCoulombY(other)-forceGravitationalY(other)};
-	double FZ {forceCoulombZ(other)-forceGravitationalZ(other)};
+	double FX {forceCoulombX(other)+forceGravitationalX(other) };
+	double FY {forceCoulombY(other)+forceGravitationalY(other)};
+	double FZ {forceCoulombZ(other)+forceGravitationalZ(other)};
 	//Computes and apply the different interactions.
 	addForces(FX, FY, FZ);
 	other->addForces(-1.0*FX, -1.0*FY, -1.0*FZ);
